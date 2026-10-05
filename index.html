@@ -5,20 +5,16 @@
 
     <meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
     <title>CodeQuest</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
 
 </head>
 
-
 <body>
-
 
     <!-- ================= NAVBAR ================= -->
 
@@ -27,7 +23,6 @@
         <div class="logo">
             ⚡ CodeQuest
         </div>
-
 
         <div class="nav-links">
 
@@ -52,7 +47,6 @@
     </nav>
 
 
-
     <!-- ================= DASHBOARD ================= -->
 
     <section id="dashboard" class="page">
@@ -60,93 +54,63 @@
         <div class="container">
 
             <h1>
-                Welcome back, Madhav! 👋
+                Welcome back,
+                <span id="userName"></span> 👋
             </h1>
 
             <p class="subtitle">
-                Keep solving problems and level up your coding skills.
+                Keep solving problems and level up.
             </p>
 
 
-
-            <!-- STATISTICS -->
+            <!-- STAT CARDS -->
 
             <div class="stats">
 
-
                 <div class="card">
 
-                    <h3>
-                        LEVEL
-                    </h3>
+                    <h3>LEVEL</h3>
 
-                    <p id="level">
-                        1
-                    </p>
+                    <p id="level">1</p>
 
-                    <small>
-                        Beginner
-                    </small>
+                    <small>Current level</small>
 
                 </div>
 
 
-
                 <div class="card">
 
-                    <h3>
-                        XP
-                    </h3>
+                    <h3>XP</h3>
 
-                    <p id="xp">
-                        0
-                    </p>
+                    <p id="xp">0</p>
 
-                    <small>
-                        Total XP
-                    </small>
+                    <small>Total XP</small>
 
                 </div>
 
 
-
                 <div class="card">
 
-                    <h3>
-                        🔥 STREAK
-                    </h3>
+                    <h3>🔥 STREAK</h3>
 
-                    <p>
-                        0
-                    </p>
+                    <p id="streak">0</p>
 
-                    <small>
-                        Days
-                    </small>
+                    <small>Days</small>
 
                 </div>
 
 
-
                 <div class="card">
 
-                    <h3>
-                        ✓ SOLVED
-                    </h3>
+                    <h3>✓ SOLVED</h3>
 
-                    <p id="solved">
-                        0
-                    </p>
+                    <p id="solved">0</p>
 
-                    <small>
-                        Problems
-                    </small>
+                    <small>Problems</small>
 
                 </div>
-
 
             </div>
-
 
 
             <!-- LEVEL PROGRESS -->
@@ -155,65 +119,49 @@
                 Level Progress
             </h2>
 
-
             <div class="progress-container">
 
-                <div
-                    class="progress-bar"
-                    id="progressBar">
+                <div id="progressBar"
+                     class="progress-bar">
                 </div>
 
             </div>
-
 
             <p id="progressText">
                 0 / 100 XP
             </p>
 
 
-
-            <!-- TODAY'S CHALLENGE -->
+            <!-- DAILY CHALLENGE -->
 
             <h2 class="section-title">
-                Today's Challenge
+                🎯 Today's Challenge
             </h2>
 
-
-            <div class="challenge">
-
-
-                <div>
-
-                    <span class="difficulty easy">
-                        EASY
-                    </span>
+            <div id="dailyChallenge"
+                 class="challenge">
+            </div>
 
 
-                    <h2>
-                        Two Sum
-                    </h2>
+            <!-- RECENT ACTIVITY -->
+
+            <h2 class="section-title">
+                📈 Recent Activity
+            </h2>
+
+            <div id="activityList"
+                 class="activity-list">
+            </div>
 
 
-                    <p>
-                        Find two numbers in an array
-                        whose sum equals the target.
-                    </p>
+            <!-- ACHIEVEMENTS -->
 
+            <h2 class="section-title">
+                🏆 Achievements
+            </h2>
 
-                    <strong>
-                        +50 XP
-                    </strong>
-
-                </div>
-
-
-                <button
-                    onclick="solveProblem(1)"
-                >
-                    Solve
-                </button>
-
-
+            <div id="achievementList"
+                 class="achievements">
             </div>
 
         </div>
@@ -221,181 +169,119 @@
     </section>
 
 
-
     <!-- ================= PROBLEMS ================= -->
 
-    <section
-        id="problems"
-        class="page hidden"
-    >
+    <section id="problems"
+             class="page hidden">
 
         <div class="container">
 
-
-            <h1>
-                Problems
-            </h1>
-
+            <h1>Problems</h1>
 
             <p class="subtitle">
                 Solve problems and earn XP.
             </p>
 
 
+            <!-- STATISTICS -->
+
+            <div class="problem-stats">
+
+                <div>
+
+                    <strong id="totalProblems">
+                        0
+                    </strong>
+
+                    <span>Total</span>
+
+                </div>
+
+
+                <div>
+
+                    <strong id="solvedProblems">
+                        0
+                    </strong>
+
+                    <span>Solved</span>
+
+                </div>
+
+
+                <div>
+
+                    <strong id="remainingProblems">
+                        0
+                    </strong>
+
+                    <span>Remaining</span>
+
+                </div>
+
+            </div>
+
 
             <!-- SEARCH -->
 
             <input
-                type="text"
                 id="searchInput"
                 class="search"
-                placeholder="Search problems..."
-                oninput="searchProblems()"
+                type="text"
+                placeholder="Search problems or topics..."
+                oninput="applyFilters()"
             >
-
 
 
             <!-- FILTERS -->
 
             <div class="filters">
 
-                <button
-                    onclick="filterProblems('all')"
-                >
+                <button onclick="setDifficulty('all')">
                     All
                 </button>
 
-
-                <button
-                    onclick="filterProblems('easy')"
-                >
+                <button onclick="setDifficulty('easy')">
                     Easy
                 </button>
 
-
-                <button
-                    onclick="filterProblems('medium')"
-                >
+                <button onclick="setDifficulty('medium')">
                     Medium
                 </button>
 
-
-                <button
-                    onclick="filterProblems('hard')"
-                >
+                <button onclick="setDifficulty('hard')">
                     Hard
                 </button>
 
             </div>
 
 
-
-            <!-- PROBLEM LIST -->
+            <!-- PROBLEMS -->
 
             <div id="problemList">
-
             </div>
-
 
         </div>
 
     </section>
-
 
 
     <!-- ================= LEADERBOARD ================= -->
 
-    <section
-        id="leaderboard"
-        class="page hidden"
-    >
+    <section id="leaderboard"
+             class="page hidden">
 
         <div class="container">
 
-
-            <h1>
-                🏆 Leaderboard
-            </h1>
-
+            <h1>🏆 Leaderboard</h1>
 
             <p class="subtitle">
-                See how you compare with other coders.
+                Compete with other programmers.
             </p>
 
 
-
-            <div class="leaderboard">
-
-
-                <div class="player">
-
-                    <span>
-                        🥇 Rahul
-                    </span>
-
-                    <strong>
-                        1250 XP
-                    </strong>
-
-                </div>
-
-
-
-                <div class="player">
-
-                    <span>
-                        🥈 Arjun
-                    </span>
-
-                    <strong>
-                        1100 XP
-                    </strong>
-
-                </div>
-
-
-
-                <div class="player current">
-
-                    <span>
-                        🥉 Madhav
-                    </span>
-
-                    <strong id="leaderboardXP">
-                        0 XP
-                    </strong>
-
-                </div>
-
-
-
-                <div class="player">
-
-                    <span>
-                        4. Rohan
-                    </span>
-
-                    <strong>
-                        800 XP
-                    </strong>
-
-                </div>
-
-
-
-                <div class="player">
-
-                    <span>
-                        5. Aditya
-                    </span>
-
-                    <strong>
-                        650 XP
-                    </strong>
-
-                </div>
-
-
+            <div id="leaderboardList"
+                 class="leaderboard">
             </div>
 
         </div>
@@ -403,38 +289,57 @@
     </section>
 
 
-
     <!-- ================= PROFILE ================= -->
 
-    <section
-        id="profile"
-        class="page hidden"
-    >
+    <section id="profile"
+             class="page hidden">
 
         <div class="container">
 
-
             <div class="profile-card">
-
 
                 <div class="avatar">
                     👨‍💻
                 </div>
 
-
-                <h1>
+                <h1 id="profileName">
                     Madhav
                 </h1>
-
 
                 <p>
                     Competitive Programmer
                 </p>
 
 
+                <!-- CHANGE NAME -->
+
+                <div class="name-editor">
+
+                    <input
+                        id="nameInput"
+                        type="text"
+                        placeholder="Enter your name"
+                    >
+
+                    <button onclick="changeName()">
+                        Save Name
+                    </button>
+
+                </div>
+
+
+                <div class="profile-level">
+
+                    Level
+
+                    <strong id="profileLevel">
+                        1
+                    </strong>
+
+                </div>
+
 
                 <div class="profile-stats">
-
 
                     <div>
 
@@ -442,12 +347,9 @@
                             0
                         </strong>
 
-                        <span>
-                            Solved
-                        </span>
+                        <span>Solved</span>
 
                     </div>
-
 
 
                     <div>
@@ -456,29 +358,39 @@
                             0
                         </strong>
 
-                        <span>
-                            XP
-                        </span>
+                        <span>XP</span>
 
                     </div>
-
 
 
                     <div>
 
-                        <strong>
+                        <strong id="profileStreak">
                             0
                         </strong>
 
-                        <span>
-                            Streak
-                        </span>
+                        <span>Streak</span>
 
                     </div>
 
-
                 </div>
 
+
+                <h2 class="profile-achievement-title">
+                    Achievements
+                </h2>
+
+                <div id="profileAchievements"
+                     class="profile-achievements">
+                </div>
+
+
+                <button class="reset-button"
+                        onclick="resetProgress()">
+
+                    Reset Progress
+
+                </button>
 
             </div>
 
@@ -487,10 +399,77 @@
     </section>
 
 
+    <!-- ================= LEVEL UP POPUP ================= -->
 
-    <!-- JAVASCRIPT -->
+    <div id="levelUpPopup"
+         class="popup hidden">
 
-    <script src="script.js"></script>
+        <div class="popup-content">
+
+            <div class="popup-icon">
+                🎉
+            </div>
+
+            <h2>
+                LEVEL UP!
+            </h2>
+
+            <p>
+                You reached
+            </p>
+
+            <strong id="newLevel">
+                Level 2
+            </strong>
+
+            <button onclick="closeLevelPopup()">
+                Continue
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= ACHIEVEMENT POPUP ================= -->
+
+    <div id="achievementPopup"
+         class="popup hidden">
+
+        <div class="popup-content">
+
+            <div id="achievementPopupIcon"
+                 class="popup-icon">
+                🏆
+            </div>
+
+            <h2>
+                ACHIEVEMENT UNLOCKED!
+            </h2>
+
+            <strong id="achievementPopupName">
+                First Blood
+            </strong>
+
+            <p id="achievementPopupDescription">
+                Solve your first problem.
+            </p>
+
+            <button onclick="closeAchievementPopup()">
+                Awesome!
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script src="js/data.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/app.js"></script>
 
 </body>
 
