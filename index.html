@@ -1,476 +1,372 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <title>CodeQuest</title>
+    <title>CodeArena</title>
 
     <link rel="stylesheet" href="css/style.css">
-
 </head>
 
 <body>
 
     <!-- ================= NAVBAR ================= -->
 
-    <nav>
+    <nav class="navbar">
 
-        <div class="logo">
-            ⚡ CodeQuest
-        </div>
+        <a href="#" class="logo">
+            <span>◆</span> CodeArena
+        </a>
 
         <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#modes">Modes</a>
+            <a href="#problems">Problems</a>
+            <a href="#leaderboard">Leaderboard</a>
+        </div>
 
-            <a onclick="showPage('dashboard')">
-                Dashboard
-            </a>
+        <div class="user-info">
 
-            <a onclick="showPage('problems')">
-                Problems
-            </a>
+            <span>
+                🔥
+                <b id="navStreak">0</b>
+            </span>
 
-            <a onclick="showPage('leaderboard')">
-                Leaderboard
-            </a>
+            <span>
+                ⭐
+                <b id="navXP">0</b>
+            </span>
 
-            <a onclick="showPage('profile')">
-                Profile
-            </a>
+            <button class="avatar" id="navAvatar">
+                M
+            </button>
 
         </div>
 
     </nav>
 
 
-    <!-- ================= DASHBOARD ================= -->
+    <!-- ================= HERO ================= -->
 
-    <section id="dashboard" class="page">
+    <main>
 
-        <div class="container">
+        <section class="hero" id="home">
 
-            <h1>
-                Welcome back,
-                <span id="userName"></span> 👋
-            </h1>
+            <div class="hero-content">
 
-            <p class="subtitle">
-                Keep solving problems and level up.
-            </p>
+                <span class="eyebrow">
+                    COMPETITIVE PROGRAMMING, GAMIFIED
+                </span>
 
-
-            <!-- STAT CARDS -->
-
-            <div class="stats">
-
-                <div class="card">
-
-                    <h3>LEVEL</h3>
-
-                    <p id="level">1</p>
-
-                    <small>Current level</small>
-
-                </div>
-
-
-                <div class="card">
-
-                    <h3>XP</h3>
-
-                    <p id="xp">0</p>
-
-                    <small>Total XP</small>
-
-                </div>
-
-
-                <div class="card">
-
-                    <h3>🔥 STREAK</h3>
-
-                    <p id="streak">0</p>
-
-                    <small>Days</small>
-
-                </div>
-
-
-                <div class="card">
-
-                    <h3>✓ SOLVED</h3>
-
-                    <p id="solved">0</p>
-
-                    <small>Problems</small>
-
-                </div>
-
-            </div>
-
-
-            <!-- LEVEL PROGRESS -->
-
-            <h2 class="section-title">
-                Level Progress
-            </h2>
-
-            <div class="progress-container">
-
-                <div id="progressBar"
-                     class="progress-bar">
-                </div>
-
-            </div>
-
-            <p id="progressText">
-                0 / 100 XP
-            </p>
-
-
-            <!-- DAILY CHALLENGE -->
-
-            <h2 class="section-title">
-                🎯 Today's Challenge
-            </h2>
-
-            <div id="dailyChallenge"
-                 class="challenge">
-            </div>
-
-
-            <!-- RECENT ACTIVITY -->
-
-            <h2 class="section-title">
-                📈 Recent Activity
-            </h2>
-
-            <div id="activityList"
-                 class="activity-list">
-            </div>
-
-
-            <!-- ACHIEVEMENTS -->
-
-            <h2 class="section-title">
-                🏆 Achievements
-            </h2>
-
-            <div id="achievementList"
-                 class="achievements">
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- ================= PROBLEMS ================= -->
-
-    <section id="problems"
-             class="page hidden">
-
-        <div class="container">
-
-            <h1>Problems</h1>
-
-            <p class="subtitle">
-                Solve problems and earn XP.
-            </p>
-
-
-            <!-- STATISTICS -->
-
-            <div class="problem-stats">
-
-                <div>
-
-                    <strong id="totalProblems">
-                        0
-                    </strong>
-
-                    <span>Total</span>
-
-                </div>
-
-
-                <div>
-
-                    <strong id="solvedProblems">
-                        0
-                    </strong>
-
-                    <span>Solved</span>
-
-                </div>
-
-
-                <div>
-
-                    <strong id="remainingProblems">
-                        0
-                    </strong>
-
-                    <span>Remaining</span>
-
-                </div>
-
-            </div>
-
-
-            <!-- SEARCH -->
-
-            <input
-                id="searchInput"
-                class="search"
-                type="text"
-                placeholder="Search problems or topics..."
-                oninput="applyFilters()"
-            >
-
-
-            <!-- FILTERS -->
-
-            <div class="filters">
-
-                <button onclick="setDifficulty('all')">
-                    All
-                </button>
-
-                <button onclick="setDifficulty('easy')">
-                    Easy
-                </button>
-
-                <button onclick="setDifficulty('medium')">
-                    Medium
-                </button>
-
-                <button onclick="setDifficulty('hard')">
-                    Hard
-                </button>
-
-            </div>
-
-
-            <!-- PROBLEMS -->
-
-            <div id="problemList">
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- ================= LEADERBOARD ================= -->
-
-    <section id="leaderboard"
-             class="page hidden">
-
-        <div class="container">
-
-            <h1>🏆 Leaderboard</h1>
-
-            <p class="subtitle">
-                Compete with other programmers.
-            </p>
-
-
-            <div id="leaderboardList"
-                 class="leaderboard">
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- ================= PROFILE ================= -->
-
-    <section id="profile"
-             class="page hidden">
-
-        <div class="container">
-
-            <div class="profile-card">
-
-                <div class="avatar">
-                    👨‍💻
-                </div>
-
-                <h1 id="profileName">
-                    Madhav
+                <h1>
+                    Code.<br>
+                    <span>Compete.</span><br>
+                    Conquer.
                 </h1>
 
                 <p>
-                    Competitive Programmer
+                    Practice competitive programming, compete in
+                    exciting game modes, build your streak and climb
+                    the CodeArena leaderboard.
                 </p>
 
+                <div class="hero-buttons">
 
-                <!-- CHANGE NAME -->
-
-                <div class="name-editor">
-
-                    <input
-                        id="nameInput"
-                        type="text"
-                        placeholder="Enter your name"
+                    <button
+                        class="btn primary"
+                        onclick="goToSection('modes')"
                     >
+                        Enter the Arena →
+                    </button>
 
-                    <button onclick="changeName()">
-                        Save Name
+                    <button
+                        class="btn secondary"
+                        onclick="goToSection('problems')"
+                    >
+                        Browse Problems
                     </button>
 
                 </div>
 
+            </div>
 
-                <div class="profile-level">
 
-                    Level
+            <!-- PLAYER CARD -->
 
-                    <strong id="profileLevel">
-                        1
-                    </strong>
+            <div class="player-card">
+
+                <div class="card-heading">
+
+                    <span>YOUR PROGRESS</span>
+
+                    <span class="live">
+                        ● LIVE
+                    </span>
 
                 </div>
 
 
-                <div class="profile-stats">
+                <div class="xp-display">
 
-                    <div>
+                    <span id="heroXP">
+                        0
+                    </span>
 
-                        <strong id="profileSolved">
-                            0
-                        </strong>
+                    <small>XP</small>
 
+                </div>
+
+
+                <div class="xp-bar">
+
+                    <div id="xpBar"></div>
+
+                </div>
+
+
+                <div class="stats-grid">
+
+                    <div class="stat">
+                        <b id="heroRating">1200</b>
+                        <span>Rating</span>
+                    </div>
+
+                    <div class="stat">
+                        <b id="heroSolved">0</b>
                         <span>Solved</span>
-
                     </div>
 
-
-                    <div>
-
-                        <strong id="profileXP">
-                            0
-                        </strong>
-
-                        <span>XP</span>
-
+                    <div class="stat">
+                        <b id="heroStreak">0</b>
+                        <span>Day Streak</span>
                     </div>
 
-
-                    <div>
-
-                        <strong id="profileStreak">
-                            0
-                        </strong>
-
-                        <span>Streak</span>
-
+                    <div class="stat">
+                        <b id="heroWins">0</b>
+                        <span>Wins</span>
                     </div>
 
                 </div>
 
+            </div>
 
-                <h2 class="profile-achievement-title">
-                    Achievements
-                </h2>
+        </section>
 
-                <div id="profileAchievements"
-                     class="profile-achievements">
+
+        <!-- ================= GAME MODES ================= -->
+
+        <section class="section" id="modes">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="eyebrow">
+                        CHOOSE YOUR BATTLE
+                    </span>
+
+                    <h2>
+                        Game Modes
+                    </h2>
+
                 </div>
 
-
-                <button class="reset-button"
-                        onclick="resetProgress()">
-
-                    Reset Progress
-
-                </button>
+                <p>
+                    Different modes reward different skills:
+                    speed, consistency, strategy and adaptability.
+                </p>
 
             </div>
 
-        </div>
 
-    </section>
+            <div
+                class="mode-grid"
+                id="modeGrid"
+            ></div>
+
+        </section>
 
 
-    <!-- ================= LEVEL UP POPUP ================= -->
+        <!-- ================= PROBLEMS ================= -->
 
-    <div id="levelUpPopup"
-         class="popup hidden">
+        <section class="section alternate" id="problems">
 
-        <div class="popup-content">
+            <div class="section-heading">
 
-            <div class="popup-icon">
-                🎉
+                <div>
+
+                    <span class="eyebrow">
+                        PRACTICE ARENA
+                    </span>
+
+                    <h2>
+                        Problem Library
+                    </h2>
+
+                </div>
+
+                <p>
+                    Choose a problem and start solving.
+                </p>
+
             </div>
 
-            <h2>
-                LEVEL UP!
-            </h2>
 
-            <p>
-                You reached
-            </p>
+            <div class="filters">
 
-            <strong id="newLevel">
-                Level 2
-            </strong>
+                <input
+                    id="searchInput"
+                    type="text"
+                    placeholder="Search problems..."
+                >
 
-            <button onclick="closeLevelPopup()">
-                Continue
-            </button>
+                <select id="topicFilter">
 
-        </div>
+                    <option value="all">
+                        All Topics
+                    </option>
+
+                </select>
+
+
+                <select id="difficultyFilter">
+
+                    <option value="all">
+                        All Difficulties
+                    </option>
+
+                    <option value="Easy">
+                        Easy
+                    </option>
+
+                    <option value="Medium">
+                        Medium
+                    </option>
+
+                    <option value="Hard">
+                        Hard
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div
+                class="problem-list"
+                id="problemList"
+            ></div>
+
+        </section>
+
+
+        <!-- ================= LEADERBOARD ================= -->
+
+        <section class="section" id="leaderboard">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="eyebrow">
+                        COMPETE WITH THE BEST
+                    </span>
+
+                    <h2>
+                        Leaderboard
+                    </h2>
+
+                </div>
+
+                <p>
+                    Your local progress affects your ranking
+                    in this prototype.
+                </p>
+
+            </div>
+
+
+            <div
+                class="leaderboard"
+                id="leaderboardList"
+            ></div>
+
+        </section>
+
+
+        <!-- ================= ACHIEVEMENTS ================= -->
+
+        <section class="section alternate">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="eyebrow">
+                        YOUR JOURNEY
+                    </span>
+
+                    <h2>
+                        Achievements
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="achievement-grid"
+                id="achievementGrid"
+            ></div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================= MODAL ================= -->
+
+    <div
+        class="modal hidden"
+        id="modal"
+    >
+
+        <div
+            class="modal-card"
+            id="modalCard"
+        ></div>
 
     </div>
 
 
-    <!-- ================= ACHIEVEMENT POPUP ================= -->
+    <!-- ================= TOAST ================= -->
 
-    <div id="achievementPopup"
-         class="popup hidden">
-
-        <div class="popup-content">
-
-            <div id="achievementPopupIcon"
-                 class="popup-icon">
-                🏆
-            </div>
-
-            <h2>
-                ACHIEVEMENT UNLOCKED!
-            </h2>
-
-            <strong id="achievementPopupName">
-                First Blood
-            </strong>
-
-            <p id="achievementPopupDescription">
-                Solve your first problem.
-            </p>
-
-            <button onclick="closeAchievementPopup()">
-                Awesome!
-            </button>
-
-        </div>
-
-    </div>
+    <div
+        class="toast"
+        id="toast"
+    ></div>
 
 
-    <!-- ================= JAVASCRIPT ================= -->
+    <!-- ================= FOOTER ================= -->
 
-    <script src="js/data.js"></script>
-    <script src="js/storage.js"></script>
-    <script src="js/ui.js"></script>
-    <script src="js/app.js"></script>
+    <footer>
 
-</body>
+        <b>
+            ◆ CodeArena
+        </b>
 
-</html>
+        <span>
+            Built with HTML · CSS · JavaScript
+        </span>
+
+    </footer>
+
+<script src="js/data.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/problems.js"></script>
+<script src="js/modes.js"></script>
+<script src="js/app.js"></script>
